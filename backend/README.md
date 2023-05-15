@@ -1,0 +1,7 @@
+# BACKEND README
+
+TODO:
+
+1 - CREATE USE CASES TO START READING DATA FROM SERVER AND TO RETRIEVE THE DATA TO FE
+
+REFACTOR SocketToNetworkTrafficProviderDataBuilder class -> messing with adapters.
