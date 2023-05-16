@@ -4,7 +4,6 @@ Module containing the "ReadNetworkTrafficData" Class.
 TODO: FIX MODULE
 """
 
-import json
 from typing import Any
 
 from ..interfaces import NetworkTrafficDataProvider
