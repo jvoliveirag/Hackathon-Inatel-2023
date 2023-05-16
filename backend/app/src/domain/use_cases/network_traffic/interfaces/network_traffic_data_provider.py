@@ -1,20 +1,18 @@
 """
-Module containing the "NetworkTrafficProvider" Interface.
+Module containing the "NetworkTrafficDataProvider" Interface.
 """
 
 from abc import ABC, abstractmethod
 
-from .network_traffic_provider_data import NetworkTrafficProviderData
 
-
-class NetworkTrafficProvider(ABC):
+class NetworkTrafficDataProvider(ABC):
     """
     Interface containing all the functionalities
     related to the network traffic provider.
     """
 
     @abstractmethod
-    def get_data(self) -> NetworkTrafficProviderData:
+    def get_data(self) -> None: # TODO: FIX IMPORT
         """
         Abstract Method to get the network traffic data.
         """

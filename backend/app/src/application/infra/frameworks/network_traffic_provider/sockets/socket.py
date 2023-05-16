@@ -10,10 +10,10 @@ import socket
 import threading
 
 from .constants import SERVER_ADDRESS
-from domain.use_cases.network_traffic.interfaces import NetworkTrafficProvider
+from domain.use_cases.network_traffic.interfaces import NetworkTrafficDataProvider
 
 
-class SocketIO(NetworkTrafficProvider):
+class SocketIO(NetworkTrafficDataProvider):
     """
     Class containing all sockets methods.
     """
@@ -57,7 +57,8 @@ class SocketIO(NetworkTrafficProvider):
         """
         Private Method to connect to the server.
 
-        TODO: LIDAR COM ConnectionRefusedError: [Errno 111] Connection refused
+        TODO: DEAL WITH
+        ConnectionRefusedError: [Errno 111] Connection refused
         when server is down
         """
         try:
@@ -73,7 +74,32 @@ class SocketIO(NetworkTrafficProvider):
         while self._is_active:
             message = self._socket.recv(1_048_576)
             decoded_message = message.decode()
-            self._messages.append(decoded_message)
+            formatted_message = self._format_message(decoded_message)
+
+            # TODO: FIX THIS LOGIC CONSIDERING THE TODO IN METHOD _format_message
+            if formatted_message:
+                self._messages.append(formatted_message)
+
+    def _format_message(self, payload: str) -> Any:
+        """
+        TODO: FIX METHOD
+        TODO: FIX TYPE
+        TODO: Payload can have more than one message.
+        I'm currently splitting the payload by "\r\n\r\n" and
+        returning only the body from the first message.
+        """
+        import json
+        data = payload.split("\r\n\r\n")
+
+        try:
+            body = data[1]
+
+        except IndexError:
+            return None
+
+        json_body = json.loads(body)
+
+        return json_body
 
     def _start_receiving_messages(self):
         """
