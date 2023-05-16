@@ -101,11 +101,11 @@ def test_flask():
 
 def test_use_case():
     """"""
-    from domain.use_cases.network_traffic.read_all_network_traffic_data import ReadAllNetworkTrafficData
+    from domain.use_cases.network_traffic.read_network_traffic_data import ReadNetworkTrafficData
     from dependencies import NETWORK_TRAFFIC_PROVIDER_INJECTION
     import time
 
-    use_case = ReadAllNetworkTrafficData(NETWORK_TRAFFIC_PROVIDER_INJECTION)
+    use_case = ReadNetworkTrafficData(NETWORK_TRAFFIC_PROVIDER_INJECTION)
     use_case.execute()
 
     import pdb; pdb.set_trace()

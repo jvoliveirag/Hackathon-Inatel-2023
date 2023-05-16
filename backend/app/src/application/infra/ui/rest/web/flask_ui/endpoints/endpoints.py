@@ -17,13 +17,13 @@ def network_traffic_data():
     Function to return the network traffic data.
     """
     # instancia caso de uso
-    # import ReadAllNetworkTrafficData
-    from domain.use_cases.network_traffic.read_all_network_traffic_data import ReadAllNetworkTrafficData
+    # import ReadNetworkTrafficData
+    from domain.use_cases.network_traffic.read_network_traffic_data import ReadNetworkTrafficData
     from dependencies import NETWORK_TRAFFIC_PROVIDER_INJECTION
 
     NETWORK_TRAFFIC_PROVIDER_INJECTION.start()
 
-    use_case = ReadAllNetworkTrafficData(NETWORK_TRAFFIC_PROVIDER_INJECTION)
+    use_case = ReadNetworkTrafficData(NETWORK_TRAFFIC_PROVIDER_INJECTION)
     response = use_case.execute()
 
     return jsonify(response)
