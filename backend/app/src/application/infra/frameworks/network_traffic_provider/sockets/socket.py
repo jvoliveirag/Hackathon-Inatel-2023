@@ -89,17 +89,31 @@ class SocketIO(NetworkTrafficDataProvider):
         returning only the body from the first message.
         """
         import json
+
+        if not payload:
+            return
+
+        response = []
         data = payload.split("\r\n\r\n")
 
-        try:
-            body = data[1]
+        # TODO: REFACTOR
+        # IF PAYLOAD HAS MORE THAN ONE MESSAGE
+        # WILL LOOP FOR EACH OF THEM
+        if not data:
+            return
 
-        except IndexError:
-            return None
+        if len(data) == 2:
+            json_body = json.loads(data[1])
+            response.append(json_body)
+            return response
 
-        json_body = json.loads(body)
+        for raw_message in data[1:]:
+            message = raw_message.split("HTTP/1.1 200 OK")
 
-        return json_body
+            json_body = json.loads(message[0])
+            response.append(json_body)
+
+        return response
 
     def _start_receiving_messages(self):
         """
