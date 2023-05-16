@@ -9,7 +9,7 @@ export default function Document() {
                 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,700&display=swap" rel="stylesheet" />
                 <link rel="icon" href="/favicon.png" />
             </Head>
-            <body className='h-screen bg-cover bg-fixed bg-gradient-to-b from-purple-400 via-purple-800 to-blue-900'>
+            <body className='h-screen bg-cover bg-fixed bg-gradient-to-b from-black via-gray-900 to-black'>
                 <Main />
                 <NextScript />
             </body>
