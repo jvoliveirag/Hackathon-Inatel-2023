@@ -21,6 +21,31 @@ const NavBar: React.FC<NavBarProps> = ({ linkName, linkPath }) => {
       setIsOpen(!isOpen);
     };
 
+    const messages = [
+        {
+            'title':'Teste1',
+            'content':'Testando123',
+        },
+        {
+            'title':'Teste2',
+            'content':'Testando1234',
+        },
+    ]
+    
+    interface Message {
+        title: string;
+        content: string
+      }
+    
+      function extractMessageData(messages: Message[]): { title: string, content: string }[] {
+        return messages.map(message => ({
+          title: message.title,
+          content: message.content
+        }));
+      }
+      
+      const extractedMessageData = extractMessageData(messages);
+
     return (
         <nav className='bg-green-400 backdrop-filter backdrop-blur-sm'>
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3">
@@ -40,29 +65,44 @@ const NavBar: React.FC<NavBarProps> = ({ linkName, linkPath }) => {
                 </button>
 
                 <div className="hidden w-full md:block md:w-auto" id="navbar-solid-bg">
+
                     <ul className="flex flex-col font-semibold text-xl rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
-                        <li className="relative" onClick={toggleDropdown}>
-                            <a href={linkPath[0]} className="flex justify-center items-center py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gray-800 md:p-0 md:hover:underline md:hover:underline-offset-8 duration-200 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
-                                {isOpen ? (
-                                    <FaChevronDown className="transition-transform duration-300 transform rotate-270 text-base mr-2" />
-                                    ) : (
-                                    <FaChevronRight className="transition-transform duration-300 text-base mr-2" />
+                        {linkName.map((name, index) => (
+                            <>
+                                {name === 'Notificações' ? (
+                                    <li className="relative" key={index} onClick={toggleDropdown}>
+                                        <a
+                                            href={linkPath[index]}
+                                            className="flex justify-center items-center py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gray-800 md:p-0 md:hover:underline md:hover:underline-offset-8 duration-200 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                                        >
+                                            {isOpen ? (
+                                                <FaChevronDown className="transition-transform duration-300 transform rotate-270 text-base mr-2" />
+                                            ) : (
+                                                <FaChevronRight className="transition-transform duration-300 text-base mr-2" />
+                                            )}
+                                            {name}
+                                        </a>
+                                        {isOpen && (
+                                            <ul className="absolute bg-black bg-opacity-70 mt-2 border-green-400 space-y-2 px-2 py-2 border rounded-md shadow-lg text-white flex flex-col">
+                                                {extractedMessageData.map(item => (
+                                                    <li key={item.title}><h1 className='text-lg font-medium'>{item.title}</h1><p className='text-sm font-thin'>{item.content}</p></li>
+                                                ))}
+                                            </ul>
+
+                                        )}
+                                    </li>
+                                ):(
+                                    <li className="relative" key={index}>
+                                        <a
+                                            href={linkPath[index]}
+                                            className="flex justify-center items-center py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gray-800 md:p-0 md:hover:underline md:hover:underline-offset-8 duration-200 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                                        >
+                                            {name}
+                                        </a>
+                                    </li>
                                 )}
-                                {linkName[0]}
-                            </a>
-                            {isOpen && (
-                                <ul className="absolute bg-gray-400 bg-opacity-70 mt-2 border-green-400 space-y-2 px-2 py-2 border rounded-md shadow-lg text-white">
-                                {/* Conteúdo do dropdown */}
-                                <p>Lorem ipsum ipsum</p>
-                                </ul>
-                            )}
-                        </li>
-                        <li>
-                            <a href={linkPath[1]} className="block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gray-800 md:p-0 md:hover:underline md:hover:underline-offset-8 duration-200 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">{linkName[1]}</a>
-                        </li>
-                        <li>
-                            <a href={linkPath[2]} className="block py-2 pl-3 pr-4 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gray-800 md:p-0 md:hover:underline md:hover:underline-offset-8 duration-200 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">{linkName[2]}</a>
-                        </li>
+                            </>
+                        ))}
                     </ul>
                 </div>
             </div>
