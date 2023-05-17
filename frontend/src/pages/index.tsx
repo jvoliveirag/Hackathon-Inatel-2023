@@ -109,7 +109,7 @@ export default function Home() {
       }
       ],
       "last_time_update": "16/05/2023, 20:44:37",
-      "name": " code",
+      "name": "spotify",
       "pid": "526",
       "protocol_traffic": [
       {
@@ -254,7 +254,7 @@ export default function Home() {
 
         <aside className="col-start-1 absolute md:w-1/4 h-screen lg:visible invisible border-0 border-r-2 border-green-400 overflow-x-auto overflow-y-hidden">
           <div className='mt-20'>
-            <h2 className='text-white text-left m-4 justify-center items-center text-sm font-thin'>{JSON.stringify(assets)}</h2>
+            <h2 className='text-white text-left m-4 justify-center items-center text-sm font-thin'>{JSON.stringify(assets, null, 2)}</h2>
           </div>
         </aside>
         
