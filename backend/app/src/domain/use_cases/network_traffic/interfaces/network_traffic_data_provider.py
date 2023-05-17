@@ -2,8 +2,10 @@
 Module containing the "NetworkTrafficDataProvider" Interface.
 """
 
+from typing import List
 from abc import ABC, abstractmethod
 
+from ....dtos.network_traffic import NetworkTrafficDTO
 
 class NetworkTrafficDataProvider(ABC):
     """
@@ -12,7 +14,13 @@ class NetworkTrafficDataProvider(ABC):
     """
 
     @abstractmethod
-    def get_data(self) -> None: # TODO: FIX IMPORT
+    def start(self) -> None:
+        """
+        Abstract Method to start the client.
+        """
+
+    @abstractmethod
+    def get_data(self) -> List[NetworkTrafficDTO]:
         """
         Abstract Method to get the network traffic data.
         """

@@ -2,9 +2,9 @@
 __init__ file to export the classes below.
 """
 
-from .host_traffic import HostTraffic
+from .host_traffic_dto import HostTrafficDTO
 
 
 __all__ = [
-    "HostTraffic",
+    "HostTrafficDTO",
 ]

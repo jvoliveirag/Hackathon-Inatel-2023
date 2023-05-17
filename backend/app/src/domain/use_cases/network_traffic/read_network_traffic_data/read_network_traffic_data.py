@@ -1,15 +1,17 @@
 """
-Module containing the "ReadNetworkTrafficData" Class.
+Module containing the "ReadNetworkTrafficDataUseCase" Class.
 
 TODO: FIX MODULE
 """
 
-from typing import Any
+from typing import List
 
 from ..interfaces import NetworkTrafficDataProvider
+from ....models.response.read_network_traffic_data_response_model import ReadNetworkTrafficDataResponseModel
+from ....dtos.network_traffic import NetworkTrafficDTO
 
 
-class ReadNetworkTrafficData:
+class ReadNetworkTrafficDataUseCase:
     """
     Class containing all the functionalities to get network traffic data.
     """
@@ -21,10 +23,24 @@ class ReadNetworkTrafficData:
         """
         self._network_traffic_provider = network_traffic_provider
 
-    def execute(self) -> Any:
+    def execute(self) -> ReadNetworkTrafficDataResponseModel:
         """
         Public Method to execute this use case by getting data from the server.
         """
         network_data = self._network_traffic_provider.get_data()
 
-        return network_data
+        response = self._format_network_traffic_data(network_data)
+
+        return response
+
+    def _format_network_traffic_data(
+        self,
+        network_traffic_data: List[NetworkTrafficDTO]
+    ) -> ReadNetworkTrafficDataResponseModel:
+        """
+        """
+        response_model = ReadNetworkTrafficDataResponseModel(
+            network_traffic_data=network_traffic_data
+        )
+
+        return response_model
