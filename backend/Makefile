@@ -35,17 +35,17 @@ lint:
 	@python3 -m pylint app/
 
 # run the tests using pytest
-test:
-	@echo TESTING
-	@python3 -m pytest -vv --cov=. --cov-report=html
+tests:
+	python -m pytest -vv
 
-# run all tests and then lint the code
-tests: test clean lint
+# run all tests and generate coverage report
+all-tests: lint
+	python -m pytest -vv --cov=. --cov-report=html --cov-config=.coveragerc
 
 # deploying the code
-deploy: tests format lint	
+deploy: tests format lint
 
 # run the code
 run:
 	@echo RUNNING
-	@python3 app/src/main.py
+	@cd app/src && python -m main

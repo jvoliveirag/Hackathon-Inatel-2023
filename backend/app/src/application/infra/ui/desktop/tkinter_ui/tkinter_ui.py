@@ -76,7 +76,7 @@ class TkinterUI(UI, customtkinter.CTk):
 
         btn_load_image = customtkinter.CTkButton(
             master=frm_options,
-            text="Load Image",
+            text="Load Chart",
             command=self.load_image
         )
         btn_load_image.grid(row=1, column=0, pady=10, padx=20)
@@ -85,14 +85,14 @@ class TkinterUI(UI, customtkinter.CTk):
 
         btn_save_image = customtkinter.CTkButton(
             master=frm_options,
-            text="Save Image",
+            text="Save Chart",
             command=self.save_image
         )
         btn_save_image.grid(row=2, column=0, pady=10, padx=20)
 
         btn_reset_image = customtkinter.CTkButton(
             master=frm_options,
-            text="Reset Image",
+            text="Reset Chart",
             command=self.reset_image
         )
         btn_reset_image.grid(row=3, column=0, pady=10, padx=20)
@@ -133,7 +133,7 @@ class TkinterUI(UI, customtkinter.CTk):
 
         lbl_image = customtkinter.CTkLabel(
             master=frm_image,
-            text="IMAGE",
+            text="CHARTS",
             font=("Roboto Medium", 16) # font name and size in px
         )
         lbl_image.grid(column=0, row=0, padx=10, pady=10)
@@ -185,28 +185,28 @@ class TkinterUI(UI, customtkinter.CTk):
 
         lbl_rotate = customtkinter.CTkLabel(
             master=frm_tools,
-            text="Rotation",
+            text="Read Network Traffic",
             font=("Roboto Medium", 16),
             fg_color=("white", "gray38"),
             corner_radius=5
         )
         lbl_rotate.grid(row=1, column=0)
 
-        self.ent_rotate = customtkinter.CTkEntry(
-            master=frm_tools,
-            width=160,
-            placeholder_text="Type the angle in degrees..."
-        )
-        self.ent_rotate.grid(row=3, column=0, padx=20, pady=20)
+        # self.ent_rotate = customtkinter.CTkEntry(
+        #     master=frm_tools,
+        #     width=160,
+        #     placeholder_text="Type the angle in degrees..."
+        # )
+        # self.ent_rotate.grid(row=3, column=0, padx=20, pady=20)
 
-        btn_rotate = customtkinter.CTkButton(
-            master=frm_tools,
-            text="Rotate",
-            font=("Roboto Medium", 16),
-            command=self.rotate_image,
-            corner_radius=5
-        )
-        btn_rotate.grid(row=4, column=0, padx=20, pady=0)
+        # btn_rotate = customtkinter.CTkButton(
+        #     master=frm_tools,
+        #     text="Rotate",
+        #     font=("Roboto Medium", 16),
+        #     command=self.rotate_image,
+        #     corner_radius=5
+        # )
+        # btn_rotate.grid(row=4, column=0, padx=20, pady=0)
 
     def btn_event(self):
         print("BUTTON PRESSED!")

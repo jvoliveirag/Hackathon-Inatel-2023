@@ -2,14 +2,15 @@
 Module containing the "main()" function.
 """
 
-from dependencies import UI_INJECTION
+from dependencies.dependencies import ui_factory
 
 
 def main() -> None:
     """
     Main Function. This is where the application starts.
     """
-    UI_INJECTION.execute()
+    ui = ui_factory()
+    ui.execute()
 
 
 if __name__ == "__main__":

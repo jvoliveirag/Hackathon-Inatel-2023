@@ -2,7 +2,7 @@
 __init__ file to export the classes below.
 """
 
-from .network_traffic import NetworkTrafficDTO
+from .network_traffic_dto import NetworkTrafficDTO
 
 
 __all__ = [
