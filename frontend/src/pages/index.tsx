@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import Head from 'next/head'
+import axios from 'axios'
+import { useEffect } from 'react';
 import { NavBar } from '../components/NavBar'
 import { FaChevronDown, FaCog, FaSearch } from "react-icons/fa"
 import Highcharts, { color } from 'highcharts';
@@ -241,6 +243,21 @@ export default function Home() {
       }
     },
   };
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('./api');
+        console.log(response.data);
+      } catch (error) {
+        console.error('Failed to fetch data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
 
   return (
     <>
