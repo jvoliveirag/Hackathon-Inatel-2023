@@ -3,8 +3,7 @@ Module containing the "DesktopController" Class.
 """
 
 from application.adapters.presenters.desktop import DesktopPresenter
-from dependencies.dependencies import network_traffic_provider_factory
-from domain.use_cases.network_traffic.read_network_traffic_data import ReadNetworkTrafficDataUseCase
+from domain.use_cases.network_traffic.read_network_traffic_data import ReadNetworkTrafficData
 
 
 class DesktopController:
@@ -23,12 +22,17 @@ class DesktopController:
         """
         TODO
         """
-        network_traffic_provider = network_traffic_provider_factory()
-        network_traffic_provider.start()  # TODO: REMOVE
-
-        use_case = ReadNetworkTrafficDataUseCase(network_traffic_provider)
+        use_case = ReadNetworkTrafficData()
         response = use_case.execute()
 
         desktop_response = self._presenter.present_network_traffic_data(response) 
 
         return desktop_response
+
+    def save_chart(self):
+        """"""
+        return "saving chart"
+
+    def export_chart(self):
+        """"""
+        return "exporting chart"

@@ -44,3 +44,4 @@ class FlaskUI(UI):
         """
         self._flask.add_url_rule('/', 'index', endpoints.index)
         self._flask.add_url_rule('/network-traffic-data', 'network-traffic-data', endpoints.network_traffic_data)
+        self._flask.add_url_rule('/network-traffic-average-speed', 'network-traffic-average-speed', endpoints.network_traffic_average_speed)

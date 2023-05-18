@@ -3,8 +3,8 @@ Module containing the "WebController" Class.
 """
 
 from application.adapters.presenters.rest.web import WebPresenter
-from dependencies.dependencies import network_traffic_provider_factory
-from domain.use_cases.network_traffic.read_network_traffic_data import ReadNetworkTrafficDataUseCase
+from domain.use_cases.network_traffic.read_network_traffic_data import ReadNetworkTrafficData
+from domain.use_cases.network_traffic.read_network_traffic_average_speed import ReadNetworkTrafficAverageSpeed
 
 
 class WebController:
@@ -21,12 +21,19 @@ class WebController:
     def get_network_traffic_data(self):
         """
         """
-        network_traffic_provider = network_traffic_provider_factory()
-        network_traffic_provider.start()  # TODO: REMOVE
-
-        use_case = ReadNetworkTrafficDataUseCase(network_traffic_provider)
+        use_case = ReadNetworkTrafficData()
         response = use_case.execute()
 
         web_response = self._presenter.present_network_traffic_data(response)
+
+        return web_response
+
+    def get_network_traffic_average_speed(self):
+        """
+        """
+        use_case = ReadNetworkTrafficAverageSpeed()
+        response = use_case.execute()
+
+        web_response = self._presenter.present_network_traffic_average_speed(response)
 
         return web_response

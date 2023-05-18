@@ -6,12 +6,12 @@ TODO: IF FUNCTION TO ALWAYS RETURN IS IMPLEMENTEND, REMOVE THE AUTOMATICALLY STA
 """
 
 from typing import Dict, List
-from collections import deque
 import json
 import socket
 import threading
+import time
 
-from .constants import SERVER_ADDRESS
+from .constants import SERVER_ADDRESS, DELAY_TO_GET_DATA_PACKAGE
 from domain.builders.network_traffic_dto_builder import NetworkTrafficDTOBuilder
 from domain.dtos.network_traffic import NetworkTrafficDTO
 from domain.use_cases.network_traffic.interfaces import NetworkTrafficDataProvider
@@ -22,19 +22,18 @@ class SocketIO(NetworkTrafficDataProvider):
     Class containing all sockets methods.
     """
     _is_active: bool
+    _messages: List[NetworkTrafficDTO]
     _socket: socket.socket
-    _messages: deque[NetworkTrafficDTO]
 
     def __init__(self) -> None:
         """
         Constructor to set up some variables.
         """
         self._is_active = False
+        self._messages = []
         self._socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self._messages = deque()
-        self._connect_to_server()
 
-        # TODO: REMOVE BELOW IF CONDITIONS ON MODULE DOCSTRING MET
+        self._connect_to_server()
         self.start()
 
     def start(self) -> None:
@@ -44,18 +43,28 @@ class SocketIO(NetworkTrafficDataProvider):
 
     def shut_down(self) -> None:
         """
-        Method to shut down the client.
+        Method to shut down the thread to receive messages.
         """
         self._is_active = False
         self._receive_messages_thread.join()
 
-    def get_data(self) -> List[NetworkTrafficDTO]:
+    def get_data(self) -> NetworkTrafficDTO:
         """
         Method to get the network traffic data.
         """
-        self.shut_down()
+        self._wait_for_messages()
 
-        messages = self._get_all_messages_from_queue()
+        messages = self._get_single_socket_message()
+
+        return messages
+
+    def get_data_package(self) -> List[NetworkTrafficDTO]:
+        """
+        Method to get the network traffic data package (collection of data).
+        """
+        self._wait_for_messages(DELAY_TO_GET_DATA_PACKAGE)
+
+        messages = self._get_socket_messages_package()
 
         return messages
 
@@ -74,9 +83,29 @@ class SocketIO(NetworkTrafficDataProvider):
             print(f"EXCEPTION: {error}")
             raise
 
-    def _get_all_messages_from_queue(self) -> List[NetworkTrafficDTO]:
-        messages = list(self._messages)
+    def _wait_for_messages(self, delay: int = 2) -> None:
+        """
+        TODO
+        """
+        self.start()
 
+        time.sleep(delay)
+
+        self.shut_down()
+
+    def _get_single_socket_message(self) -> NetworkTrafficDTO:
+        """
+        """
+        # TODO: FIX - ONLY RETURNING THE FIRST MESSAGE (WHICH MEANS ONLY ONE PROCESS)
+        # TODO: FIX - IMPLEMENT A WAY TO GET ALL DTO FROM THE FIRST MESSAGE (ALL THE PROCESS FROM THE FIRST MESSAGE)
+        first_message = self._messages[0]
+        self._messages.clear()
+
+        return first_message
+
+    def _get_socket_messages_package(self) -> List[NetworkTrafficDTO]:
+        """"""
+        messages = list(self._messages)
         self._messages.clear()
 
         return messages
@@ -91,7 +120,7 @@ class SocketIO(NetworkTrafficDataProvider):
         """
         """
         while self._is_active:
-            MESSAGE_SIZE = 10 * 1024
+            MESSAGE_SIZE = 2 ** 16
             message = self._socket.recv(MESSAGE_SIZE)
             decoded_message = message.decode()
 
@@ -144,7 +173,12 @@ class SocketIO(NetworkTrafficDataProvider):
         json_messages: List[Dict[str, str]] = []
 
         for body in bodies:
-            json_message: List[Dict[str, str]] = json.loads(body)
+
+            try:
+                json_message: List[Dict[str, str]] = json.loads(body)
+            except json.decoder.JSONDecodeError:
+                continue
+
             json_messages.extend(json_message)
 
         return json_messages

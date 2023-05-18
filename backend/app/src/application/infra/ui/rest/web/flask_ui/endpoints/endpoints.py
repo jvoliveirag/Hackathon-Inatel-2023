@@ -22,3 +22,12 @@ def network_traffic_data():
     response = controller.get_network_traffic_data()
 
     return jsonify(response)
+
+
+def network_traffic_average_speed():
+    """
+    """
+    controller = WebController()
+    response = controller.get_network_traffic_average_speed()
+
+    return jsonify(response)
