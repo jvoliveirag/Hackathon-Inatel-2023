@@ -7,6 +7,7 @@ from tkinter import filedialog, Canvas
 
 import customtkinter
 
+from .functions import read_network_traffic_data
 from ...interfaces import UI
 
 
@@ -97,12 +98,12 @@ class TkinterUI(UI, customtkinter.CTk):
         )
         btn_reset_image.grid(row=3, column=0, pady=10, padx=20)
 
-        btn_apply_changes = customtkinter.CTkButton(
-            master=frm_options,
-            text="Apply Changes",
-            command=self.apply_changes_to_image
-        )
-        btn_apply_changes.grid(row=4, column=0, pady=10, padx=20)
+        # btn_apply_changes = customtkinter.CTkButton(
+        #     master=frm_options,
+        #     text="Apply Changes",
+        #     command=self.apply_changes_to_image
+        # )
+        # btn_apply_changes.grid(row=4, column=0, pady=10, padx=20)
 
         lbl_space = customtkinter.CTkLabel(master=frm_options, text="")
         lbl_space.grid(row=5, column=0)
@@ -185,7 +186,7 @@ class TkinterUI(UI, customtkinter.CTk):
 
         lbl_rotate = customtkinter.CTkLabel(
             master=frm_tools,
-            text="Read Network Traffic",
+            text="Read Network",
             font=("Roboto Medium", 16),
             fg_color=("white", "gray38"),
             corner_radius=5

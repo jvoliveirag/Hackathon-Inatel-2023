@@ -12,7 +12,7 @@ def ui_factory() -> UI:
     from application.infra.ui.rest.web.flask_ui import FlaskUI
     from application.infra.ui.desktop.tkinter_ui import TkinterUI
 
-    return TkinterUI()
+    return FlaskUI()
 
 
 def network_traffic_provider_factory() -> NetworkTrafficDataProvider:

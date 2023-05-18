@@ -2,6 +2,7 @@
 Module containing the "SocketIO" Class.
 
 TODO: MOVE PARSERS AND FORMATTERS TO INTERFACE ADAPTERS LAYER
+TODO: IF FUNCTION TO ALWAYS RETURN IS IMPLEMENTEND, REMOVE THE AUTOMATICALLY START
 """
 
 from typing import Dict, List
@@ -20,7 +21,7 @@ class SocketIO(NetworkTrafficDataProvider):
     """
     Class containing all sockets methods.
     """
-    _is_active: bool = False
+    _is_active: bool
     _socket: socket.socket
     _messages: deque[NetworkTrafficDTO]
 
@@ -28,9 +29,13 @@ class SocketIO(NetworkTrafficDataProvider):
         """
         Constructor to set up some variables.
         """
+        self._is_active = False
         self._socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self._messages = deque()
         self._connect_to_server()
+
+        # TODO: REMOVE BELOW IF CONDITIONS ON MODULE DOCSTRING MET
+        self.start()
 
     def start(self) -> None:
         """"""
@@ -52,15 +57,6 @@ class SocketIO(NetworkTrafficDataProvider):
 
         messages = self._get_all_messages_from_queue()
 
-        self.start()
-
-        return messages
-    
-    def _get_all_messages_from_queue(self) -> List[NetworkTrafficDTO]:
-        messages = list(self._messages)
-
-        self._messages.clear()
-
         return messages
 
     def _connect_to_server(self) -> None:
@@ -78,6 +74,13 @@ class SocketIO(NetworkTrafficDataProvider):
             print(f"EXCEPTION: {error}")
             raise
 
+    def _get_all_messages_from_queue(self) -> List[NetworkTrafficDTO]:
+        messages = list(self._messages)
+
+        self._messages.clear()
+
+        return messages
+
     def _start_thread_to_receive_messages(self):
         """
         """
@@ -88,7 +91,8 @@ class SocketIO(NetworkTrafficDataProvider):
         """
         """
         while self._is_active:
-            message = self._socket.recv(1_048_576)
+            MESSAGE_SIZE = 10 * 1024
+            message = self._socket.recv(MESSAGE_SIZE)
             decoded_message = message.decode()
 
             self._store_message_on_queue(decoded_message)
