@@ -135,7 +135,6 @@ export default function Home() {
       try {
         const response = await axios.get('./api');
         console.log(response.data);
-        console.log(response.data.network_traffic_data[0])
       } catch (error) {
         console.error('Failed to fetch data:', error);
       }
@@ -155,10 +154,10 @@ export default function Home() {
 
         <NavBar linkName={['Notificações', 'Home', 'Métricas', 'Ajuda', 'Contato']} linkPath={['#', '/', '/report', HELP_CONTACT, HELP_CONTACT]} />
         
-        <main className='md:col-start-1 md:col-end-5 lg:col-start-2 lg:col-end-5 md:flex md:items-center md:justify-center md:flex-wrap md:flex-col md:flex-1 md:pb-10 md:gap-4'>
-
-          <h2 className='text-white text-left m-4 justify-center items-center text-sm font-thin'>{JSON.stringify(assets, null, 2)}</h2>
-
+        <main className='flex items-center justify-center flex-wrap flex-col flex-1 pb-10'>
+          <div className='-z-10 flex bg-black border border-white justify-center items-center rounded-xl opacity-80 md:mx-56 md:py-12 m-8 md:mt-16 md:shadow-gray-500 md:shadow-lg'>
+            <h2 className='text-white m-4 justify-center items-center text-sm font-thin'>{JSON.stringify(assets, null, 2)}</h2>
+          </div>
         </main>
 
         <footer className='flex items-center justify-center text-xs align-baseline text-white'>
