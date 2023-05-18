@@ -1,14 +1,16 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import Head from 'next/head'
-import axios from 'axios'
-import { useEffect } from 'react';
 import { NavBar } from '../components/NavBar'
 import { FaPlay } from "react-icons/fa"
 
 const HELP_CONTACT = 'https://github.com/jvoliveirag/Hackathon-Inatel-2023'
 
 export default function Home() {
+
+  var userLogged = true //logica para verificar estado de userLogged
+  var navbarName = ''
+  var navbarLink = ''
+  userLogged ? (navbarName = 'Notificações', navbarLink = '#') : (navbarName = 'Login', navbarLink = '/login')
 
   return (
     <>
@@ -18,11 +20,11 @@ export default function Home() {
         
       <div className='h-screen flex flex-col'>  
 
-        <NavBar linkName={['Notificações', 'Ajuda', 'Contato']} linkPath={['#', HELP_CONTACT, HELP_CONTACT]} />
+        <NavBar linkName={[navbarName, 'Ajuda', 'Contato']} linkPath={[navbarLink, HELP_CONTACT, HELP_CONTACT]} />
         
         <main className='flex items-center justify-center flex-wrap flex-col flex-1 pb-10'>
-          <Link href='/report'>
-            <button className='bg-green-400 rounded-full p-10 flex items-center justify-center text-9xl'>
+          <Link href={userLogged ? '/report' : '/login'}>
+            <button className='bg-green-400 rounded-full p-10 flex items-center justify-center text-9xl shadow-gray-500 shadow-lg transition ease-in-out delay-150 hover:scale-105 duration-150 focus:shadow-outline'>
               <FaPlay className='pl-6'/>
             </button>
           </Link>
