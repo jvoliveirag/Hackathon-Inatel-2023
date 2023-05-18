@@ -20,4 +20,6 @@ def network_traffic_provider_factory() -> NetworkTrafficDataProvider:
     """
     from application.infra.providers.network_traffic_provider.sockets import SocketIO
 
-    return SocketIO()
+    network_traffic_provider = SocketIO()
+
+    return network_traffic_provider

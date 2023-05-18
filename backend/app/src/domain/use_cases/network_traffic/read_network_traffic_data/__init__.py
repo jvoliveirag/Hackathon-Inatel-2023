@@ -2,9 +2,9 @@
 __init__ file to export the classes below.
 """
 
-from .read_network_traffic_data import ReadNetworkTrafficDataUseCase
+from .read_network_traffic_data import ReadNetworkTrafficData
 
 
 __all__ = [
-    "ReadNetworkTrafficDataUseCase",
+    "ReadNetworkTrafficData",
 ]

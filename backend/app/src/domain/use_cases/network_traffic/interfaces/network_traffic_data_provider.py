@@ -20,7 +20,13 @@ class NetworkTrafficDataProvider(ABC):
         """
 
     @abstractmethod
-    def get_data(self) -> List[NetworkTrafficDTO]:
+    def get_data(self) -> NetworkTrafficDTO:
         """
-        Abstract Method to get the network traffic data.
+        Abstract Method to get a single network traffic data.
+        """
+
+    @abstractmethod
+    def get_data_package(self) -> List[NetworkTrafficDTO]:
+        """
+        Abstract Method to get the network traffic data package (collection of data).
         """
