@@ -1,25 +1,27 @@
 """
-Module containing the "WebController" Class.
+Module containing the "DesktopController" Class.
 """
 
-from application.adapters.presenters.rest.web import WebPresenter
+from application.adapters.presenters.desktop import DesktopPresenter
 from dependencies.dependencies import network_traffic_provider_factory
 from domain.use_cases.network_traffic.read_network_traffic_data import ReadNetworkTrafficDataUseCase
 
 
-class WebController:
+class DesktopController:
     """
-    TODO: FIX
+    TODO
     """
-    _presenter: WebPresenter
+    _presenter: DesktopPresenter
 
     def __init__(self) -> None:
         """
+        TODO
         """
-        self._presenter = WebPresenter()
+        self._presenter = DesktopPresenter()
 
     def get_network_traffic_data(self):
         """
+        TODO
         """
         network_traffic_provider = network_traffic_provider_factory()
         network_traffic_provider.start()  # TODO: REMOVE
@@ -27,6 +29,6 @@ class WebController:
         use_case = ReadNetworkTrafficDataUseCase(network_traffic_provider)
         response = use_case.execute()
 
-        web_response = self._presenter.present_network_traffic_data(response)
+        desktop_response = self._presenter.present_network_traffic_data(response) 
 
-        return web_response
+        return desktop_response
