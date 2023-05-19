@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import logoImg from '../../assets/logo.png'
-import { FaChevronRight, FaChevronDown } from "react-icons/fa"
+import { FaChevronRight, FaChevronDown, FaCircle } from "react-icons/fa"
 
 type NavBarProps = {
   linkName: string[];
@@ -23,19 +23,16 @@ const NavBar: React.FC<NavBarProps> = ({ linkName, linkPath }) => {
 
     const messages = [
         {
-            'title':'Teste1',
-            'content':'Testando123',
+            'title':'Consumo excedido!',
+            'content':'Discord: 10% a mais que o estipulado.',
         },
-        {
-            'title':'Teste2',
-            'content':'Testando1234',
-        },
+
     ]
     
     interface Message {
         title: string;
         content: string
-      }
+    }
     
       function extractMessageData(messages: Message[]): { title: string, content: string }[] {
         return messages.map(message => ({
@@ -81,11 +78,12 @@ const NavBar: React.FC<NavBarProps> = ({ linkName, linkPath }) => {
                                                 <FaChevronRight className="transition-transform duration-300 text-base mr-2" />
                                             )}
                                             {name}
+                                            <div className={`flex bg-red-600 rounded-full justify-center items-center text-xs text-red-600 mb-4 ${extractMessageData.length !== 0 && !isOpen ? 'block' : 'hidden'}`}><FaCircle className='text-xs'/></div>
                                         </a>
                                         {isOpen && (
                                             <ul className="absolute bg-black bg-opacity-70 mt-2 border-green-400 space-y-2 px-2 py-2 border rounded-md shadow-lg text-white flex flex-col">
                                                 {extractedMessageData.map(item => (
-                                                    <li key={item.title}><h1 className='text-lg font-medium'>{item.title}</h1><p className='text-sm font-thin'>{item.content}</p></li>
+                                                    <li key={item.title}><h1 className='text-xs font-bold'>{item.title}</h1><p className='text-xs font-thin'>{item.content}</p></li>
                                                 ))}
                                             </ul>
 
