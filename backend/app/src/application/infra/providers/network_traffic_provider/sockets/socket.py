@@ -11,8 +11,8 @@ import socket
 import threading
 import time
 
-from .constants import SERVER_ADDRESS, DELAY_TO_GET_DATA_PACKAGE
-from domain.builders.network_traffic_dto_builder import NetworkTrafficDTOBuilder
+from .constants import SERVER_ADDRESS, DELAY_TO_GET_DATA_PACKAGE, DELAY_TO_GET_MESSAGE
+from domain.dtos.builders.network_traffic_dto_builder import NetworkTrafficDTOBuilder
 from domain.dtos.network_traffic import NetworkTrafficDTO
 from domain.use_cases.network_traffic.interfaces import NetworkTrafficDataProvider
 
@@ -83,7 +83,7 @@ class SocketIO(NetworkTrafficDataProvider):
             print(f"EXCEPTION: {error}")
             raise
 
-    def _wait_for_messages(self, delay: int = 2) -> None:
+    def _wait_for_messages(self, delay: int = DELAY_TO_GET_MESSAGE) -> None:
         """
         TODO
         """
@@ -124,6 +124,9 @@ class SocketIO(NetworkTrafficDataProvider):
             message = self._socket.recv(MESSAGE_SIZE)
             decoded_message = message.decode()
 
+            print()
+            print(decoded_message)
+            print()
             self._store_message_on_queue(decoded_message)
 
     def _store_message_on_queue(self, message: str) -> None:
