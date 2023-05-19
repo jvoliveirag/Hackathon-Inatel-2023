@@ -2,6 +2,7 @@
 TODO: FIX
 """
 
+from typing import List
 from dataclasses import dataclass
 from datetime import datetime
 
@@ -15,3 +16,5 @@ class NetworkTrafficAverageSpeedDTO:
     average_upload_speed: float
     last_time_update: datetime
     create_time: datetime
+    downloads: List[float]
+    uploads: List[float]

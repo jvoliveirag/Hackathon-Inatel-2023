@@ -3,8 +3,8 @@ Module containing the "TkinterUI" Class.
 TODO: FIX THIS MODULE
 """
 
-# from typing import Dict
-from tkinter import filedialog, Canvas
+import json
+import tkinter as tk
 
 import customtkinter
 import matplotlib
@@ -30,36 +30,6 @@ class TkinterUI(UI, customtkinter.CTk):
         self._create_interface()
         self.mainloop()
 
-    def _read_network_traffic_data(self) -> None:
-        """
-        Private Method to read the network traffic data from the backend.
-        """
-        self._frm_charts.clipboard_clear()
-
-        traffic_data = functions.read_network_traffic_data()
-        names = traffic_data.keys()
-        speeds = traffic_data.values()
-
-        # create a figure
-        CHART_LENGTH = 10
-        CHART_WIDTH = 8
-        CHART_SIZE = (CHART_LENGTH, CHART_WIDTH)
-        figure = Figure(figsize=CHART_SIZE, dpi=100)
-        figure.clear()
-
-        # create FigureCanvasTkAgg object
-        figure_canvas = FigureCanvasTkAgg(figure, self._frm_charts)
-
-        # create axes
-        axes = figure.add_subplot()
-
-        # create the barchart
-        axes.bar(names, speeds)
-        axes.set_title('Speed')
-        axes.set_ylabel('Download | Upload')
-
-        figure_canvas.get_tk_widget().grid(row=1)
-
     def _create_interface(self) -> None:
         """"""
         self._setup()
@@ -78,7 +48,6 @@ class TkinterUI(UI, customtkinter.CTk):
         """"""
         self._create_options_frame()
         self._create_charts_frame()
-        self._create_tools_frame()
 
     def _main_frame_setup(self) -> None:
         """"""
@@ -112,14 +81,14 @@ class TkinterUI(UI, customtkinter.CTk):
 
         btn_save_image = customtkinter.CTkButton(
             master=frm_options,
-            text="Save Chart",
+            text="Save Data",
             command=functions.save_chart
         )
         btn_save_image.grid(row=2, column=0, pady=10, padx=20)
 
         btn_reset_image = customtkinter.CTkButton(
             master=frm_options,
-            text="Export Chart",
+            text="Export Data",
             command=functions.export_chart
         )
         btn_reset_image.grid(row=3, column=0, pady=10, padx=20)
@@ -157,14 +126,20 @@ class TkinterUI(UI, customtkinter.CTk):
         )
         lbl_image.grid(column=0, row=0, padx=10, pady=10)
 
-        self.canvas = Canvas(self._frm_charts, bg="#2A2D2E", highlightthickness=0)
+        self.canvas = tk.Canvas(self._frm_charts, bg="#2A2D2E", highlightthickness=0)
         self.canvas.grid(row=1, column=0, sticky="nswe")
 
         self._frm_charts.grid_rowconfigure(1, weight=1)
         self._frm_charts.grid_columnconfigure(0, weight=1)
+        # self._frm_charts.grid_columnconfigure(2, weight=1)
+
+        frm_buttons = customtkinter.CTkFrame(
+            master=self._frm_charts,
+        )
+        frm_buttons.grid(row=2, column=0)
 
         btn_get_traffic_data = customtkinter.CTkButton(
-            master=self._frm_charts,
+            master=frm_buttons,
             text="Read Network Traffic",
             font=("Roboto Medium", 20),
             height=30,
@@ -172,31 +147,65 @@ class TkinterUI(UI, customtkinter.CTk):
             border_spacing=20,
             command=self._read_network_traffic_data,
         )
-        btn_get_traffic_data.grid(row=2, column=0)
+        btn_get_traffic_data.grid(row=0, column=0, padx=40)
 
-    def _create_tools_frame(self) -> None:
-        """"""
-        frm_tools = customtkinter.CTkFrame(
-            master=self,
-            corner_radius=20
+        btn_get_traffic_data = customtkinter.CTkButton(
+            master=frm_buttons,
+            text="Read Network Traffic Average Speed",
+            font=("Roboto Medium", 20),
+            height=30,
+            width=55,
+            border_spacing=20,
+            command=self._read_network_traffic_average_speed,
         )
-        frm_tools.grid(row=0, column=2, pady=10, padx=10, sticky="ns")
+        btn_get_traffic_data.grid(row=0, column=1, padx=40)
 
-        lbl_rotate = customtkinter.CTkLabel(
-            master=frm_tools,
-            text="TOOLS",
-            font=("Roboto Medium", 20) # font name and size in px
-        )
-        lbl_rotate.grid(row=0, column=0, padx=20, pady=10)
+    def _read_network_traffic_average_speed(self) -> None:
+        """
+        TODO
+        """
+        average_speed = functions.read_network_traffic_average_speed()
 
-        lbl_rotate = customtkinter.CTkLabel(
-            master=frm_tools,
-            text="Read Network",
-            font=("Roboto Medium", 16),
-            fg_color=("white", "gray38"),
-            corner_radius=5
-        )
-        lbl_rotate.grid(row=1, column=0)
+        names = traffic_data.keys()
+        speeds = traffic_data.values()
+
+        # create a figure
+        CHART_LENGTH = 10
+        CHART_WIDTH = 8
+        CHART_SIZE = (CHART_LENGTH, CHART_WIDTH)
+        figure = Figure(figsize=CHART_SIZE, dpi=100)
+        figure.clear()
+
+        # create FigureCanvasTkAgg object
+        figure_canvas = FigureCanvasTkAgg(figure, self._frm_charts)
+
+        # create axes
+        axes = figure.add_subplot()
+
+        # create the barchart
+        axes.bar(names, speeds)
+        axes.set_title('Speed')
+        axes.set_ylabel('Download | Upload')
+
+        figure_canvas.get_tk_widget().grid(row=1)
+
+    def _read_network_traffic_data(self) -> None:
+        """
+        Private Method to read the network traffic data from the backend.
+        """
+        traffic_data = functions.read_network_traffic_data()
+
+        scrollbar = tk.Scrollbar(self._frm_charts)
+        scrollbar.grid(row=1, column=1, sticky="ns")
+
+        text_widget = tk.Text(self._frm_charts, wrap="word", bg=self["bg"], fg="#0f0")
+        text_widget.grid(row=1, column=0, sticky="nswe")
+        text_widget.config(yscrollcommand=scrollbar.set)
+
+        scrollbar.config(command=text_widget.yview)
+
+        formatted_json = json.dumps(traffic_data, indent=4, sort_keys=True)
+        text_widget.insert("1.0", formatted_json)
 
     def _change_appearance_mode(self, new_appearance_mode: str):
         customtkinter.set_appearance_mode(new_appearance_mode)

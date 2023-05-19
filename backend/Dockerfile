@@ -20,4 +20,4 @@ COPY /app .
 ENV UI_INJECTION="Flask"
 
 # Set the command to run the App
-CMD ["python", "src/main.py"]
+CMD ["python", "-m" "src.main"]
