@@ -124,9 +124,6 @@ class SocketIO(NetworkTrafficDataProvider):
             message = self._socket.recv(MESSAGE_SIZE)
             decoded_message = message.decode()
 
-            print()
-            print(decoded_message)
-            print()
             self._store_message_on_queue(decoded_message)
 
     def _store_message_on_queue(self, message: str) -> None:

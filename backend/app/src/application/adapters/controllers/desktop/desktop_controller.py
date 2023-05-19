@@ -4,6 +4,7 @@ Module containing the "DesktopController" Class.
 
 from application.adapters.presenters.desktop import DesktopPresenter
 from domain.use_cases.network_traffic.read_network_traffic_data import ReadNetworkTrafficData
+from domain.use_cases.network_traffic.read_network_traffic_average_speed import ReadNetworkTrafficAverageSpeed
 
 
 class DesktopController:
@@ -26,6 +27,17 @@ class DesktopController:
         response = use_case.execute()
 
         desktop_response = self._presenter.present_network_traffic_data(response) 
+
+        return desktop_response
+
+    def get_network_traffic_average_speed(self):
+        """
+        TODO
+        """
+        use_case = ReadNetworkTrafficAverageSpeed()
+        response = use_case.execute()
+
+        desktop_response = self._presenter.present_network_traffic_average_speed(response) 
 
         return desktop_response
 

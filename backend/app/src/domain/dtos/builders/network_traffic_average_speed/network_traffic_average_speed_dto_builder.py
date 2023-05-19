@@ -22,6 +22,8 @@ class NetworkTrafficAverageSpeedDTOBuilder:
         average_upload_speed: float = network_traffic_average_data.get("upload_average", 0.0)  # type: ignore
         last_time_update: datetime = network_traffic_average_data.get("last_time_update", datetime.now())  # type: ignore
         create_time: datetime = network_traffic_average_data.get("create_time", datetime.now())  # type: ignore
+        downloads = network_traffic_average_data.get("downloads", [])  # type: ignore
+        uploads = network_traffic_average_data.get("uploads", [])  # type: ignore
 
         dto = NetworkTrafficAverageSpeedDTO(
             pid=pid,
@@ -29,7 +31,9 @@ class NetworkTrafficAverageSpeedDTOBuilder:
             average_download_speed=average_download_speed,
             average_upload_speed=average_upload_speed,
             last_time_update=last_time_update,
-            create_time=create_time
+            create_time=create_time,
+            downloads=downloads,
+            uploads=uploads
         )
 
         return dto

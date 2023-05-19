@@ -19,7 +19,18 @@ def read_network_traffic_data() -> Dict[str, str]:
     response = _controller.get_network_traffic_data()
 
     network_traffic_data = response.get("network_traffic_data")
-    traffic_data = _format_network_traffic_data_to_plot_chart(network_traffic_data)
+
+    return network_traffic_data
+
+
+def read_network_traffic_average_speed() -> Dict[str, str]:
+    """
+    TODO FIX
+    """
+    response = _controller.get_network_traffic_average_speed()
+
+    network_traffic_package = response.get("network_traffic_package")
+    traffic_data = _format_network_traffic_data_to_plot_chart(network_traffic_package)
 
     return traffic_data
 
@@ -39,6 +50,10 @@ def _format_network_traffic_data_to_plot_chart(network_traffic_data):
     TODO: FIX
     """
     traffic_data = {}
+
+    print()
+    print(network_traffic_data)
+    print()
 
     for data in network_traffic_data:
         download_speed = data["download_speed"]

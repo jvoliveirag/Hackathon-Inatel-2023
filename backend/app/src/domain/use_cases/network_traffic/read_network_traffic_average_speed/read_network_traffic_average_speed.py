@@ -60,10 +60,8 @@ class ReadNetworkTrafficAverageSpeed:
         TODO: REFACTOR THIS METHOD
         """
         response: List[NetworkTrafficAverageSpeedDTO] = []
-        speeds = defaultdict(lambda: {"download_average": 0.0, "upload_average": 0.0, "process_count": 0})
 
-        for data in network_traffic_data:
-            self._sum_all_speeds(speeds, data)
+        speeds = self._sum_all_speeds(network_traffic_data)
 
         for pid, averages in speeds.items():
             self._calculate_averages(speeds, pid, averages)
@@ -76,20 +74,27 @@ class ReadNetworkTrafficAverageSpeed:
 
         return response
 
-    def _sum_all_speeds(self, speeds, data):
+    def _sum_all_speeds(self, network_traffic_data: List[NetworkTrafficDTO]):
         """
         TODO: REFACTOR
         """
-        pid = data.pid
-        d = self._format_speed_to_float(data.download_speed)
-        u = self._format_speed_to_float(data.upload_speed)
+        speeds = defaultdict(lambda: {"download_average": 0.0, "upload_average": 0.0, "process_count": 0, "downloads": [], "uploads": []})
 
-        speeds[pid]["download_average"] += d
-        speeds[pid]["upload_average"] += u
-        speeds[pid]["process_count"] += 1
-        speeds[pid]["name"] = data.name
-        speeds[pid]["last_time_update"] = data.last_time_update
-        speeds[pid]["create_time"] = data.create_time
+        for data in network_traffic_data:
+            pid = data.pid
+            d = self._format_speed_to_float(data.download_speed)
+            u = self._format_speed_to_float(data.upload_speed)
+
+            speeds[pid]["downloads"].append(d)
+            speeds[pid]["uploads"].append(u)
+            speeds[pid]["download_average"] += d
+            speeds[pid]["upload_average"] += u
+            speeds[pid]["process_count"] += 1
+            speeds[pid]["name"] = data.name
+            speeds[pid]["last_time_update"] = data.last_time_update
+            speeds[pid]["create_time"] = data.create_time
+
+        return speeds
 
     def _calculate_averages(self, speeds, pid, averages):
         """
