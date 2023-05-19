@@ -7,7 +7,7 @@ import { NavBar } from '../../components/NavBar'
 
 const HELP_CONTACT = 'https://github.com/jvoliveirag/Hackathon-Inatel-2023'
 
-export default function Home() {
+export default function Traffic() {
 
   const assets = [
     {
@@ -133,7 +133,7 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('./api');
+        const response = await axios.get('../api');
         console.log(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
@@ -152,7 +152,7 @@ export default function Home() {
         
       <div className='h-screen flex flex-col'>  
 
-        <NavBar linkName={['Notificações', 'Home', 'Métricas', 'Ajuda', 'Contato']} linkPath={['#', '/', '/report', HELP_CONTACT, HELP_CONTACT]} />
+        <NavBar linkName={['Notificações', 'Métricas', 'Ajuda', 'Contato']} linkPath={['#', '/report', HELP_CONTACT, HELP_CONTACT]} />
         
         <main className='flex items-center justify-center flex-wrap flex-col flex-1 pb-10'>
           <div className='-z-10 flex bg-black border border-white justify-center items-center rounded-xl opacity-80 md:mx-56 md:py-12 m-8 md:mt-16 md:shadow-gray-500 md:shadow-lg'>
