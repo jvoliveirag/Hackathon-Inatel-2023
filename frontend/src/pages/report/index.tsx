@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Head from 'next/head'
 import axios from 'axios'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { NavBar } from '../../components/NavBar'
 import { FaChevronDown, FaCog, FaSearch, FaRedo } from "react-icons/fa"
 import Highcharts from 'highcharts';
@@ -318,6 +318,21 @@ export default function Report() {
   }, []);
 
 
+
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedValue, setSelectedValue] = useState('');
+  
+    const toggleDropdown = () => {
+      setIsOpen(!isOpen);
+    };
+  
+    const handleOptionSelect = (value: string) => {
+      setSelectedValue(value);
+      setIsOpen(false);
+      console.log(value) //pega o pid para selecionar os valores a serem exibidos no grafico
+    };
+
+
   return (
     <>
         <Head>
@@ -335,7 +350,7 @@ export default function Report() {
                     <div className='grid lg:grid-cols-2 grid-cols-1 gap-8'>
                         <div className='mt-8 lg:mt-0'>
                             <div className='flex items-center justify-between bg-white rounded-full p-1 gap-4 md:text-2xl'>
-                                <input type="text" placeholder='procure aqui' className='rounded-full text-sm lg:pr-28 sm:pr-28 pr-0'/>
+                                <input type="text" placeholder='procure aqui um alerta' className='rounded-full text-sm lg:pr-28 sm:pr-28 pr-0'/>
                                 <div className='flex items-center justify-center gap-4 mr-2'>
                                     <Link href='/report'>
                                         <button className='flex items-center justify-center' type="submit">
@@ -353,10 +368,30 @@ export default function Report() {
                                 <HighchartsReact highcharts={Highcharts} options={columnChartData}/>
                             </div>
                         </div>
-                        <div className='bg-white rounded-xl p-2'>
-                            <div className='flex justify-end text-2xl'>
-                                <FaChevronDown/>
 
+                        <div className='bg-white rounded-xl p-2'>
+                            <div className="relative inline-block">
+                                <div className="flex items-center text-2xl cursor-pointer" onClick={toggleDropdown}>
+                                    <FaChevronDown />
+                                </div>
+                                {isOpen && (
+                                    <ul className="absolute z-10 left-0 w-48 py-2 mt-2 bg-white border border-gray-300 rounded-xl shadow">
+                                    {extractedNetworkTrafficData.map((option) => (
+                                        <li
+                                        key={option.pid}
+                                        className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                                        onClick={() => handleOptionSelect(option.pid)}
+                                        >
+                                        {option.name}
+                                        </li>
+                                    ))}
+                                    </ul>
+                                )}
+                                {selectedValue && (
+                                    <div className="mt-2 text-black hidden">
+                                    Valor selecionado: {selectedValue}
+                                    </div>
+                                )}
                             </div>
                             <div>
                                 <HighchartsReact highcharts={Highcharts} options={splineChartData}/>
