@@ -27,7 +27,7 @@ class FlaskUI(UI):
         self._configure()
         self._create_routes()
 
-        self._flask.run()
+        self._flask.run(host='0.0.0.0', port=5000)
 
     def _configure(self) -> None:
         """

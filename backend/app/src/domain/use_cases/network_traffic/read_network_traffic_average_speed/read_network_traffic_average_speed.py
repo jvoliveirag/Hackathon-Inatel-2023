@@ -6,8 +6,8 @@ TODO: FIX MODULE
 
 from typing import List
 from collections import defaultdict
-from datetime import datetime
 
+from ....dtos.builders.network_traffic_average_speed import NetworkTrafficAverageSpeedDTOBuilder
 from ....dtos.network_traffic import NetworkTrafficDTO
 from ....dtos.network_traffic_average_speed import NetworkTrafficAverageSpeedDTO
 from ....entities.network_traffic import NetworkTraffic
@@ -70,7 +70,7 @@ class ReadNetworkTrafficAverageSpeed:
 
         # Imprimir a velocidade média de download e upload para cada processo
         for pid, averages in speeds.items():
-            dto = self._create_average_speed_dto(averages, pid)
+            dto = NetworkTrafficAverageSpeedDTOBuilder().build(pid, averages)
 
             response.append(dto)
 
@@ -102,26 +102,6 @@ class ReadNetworkTrafficAverageSpeed:
 
         speeds[pid]["download_average"] = downloads_sum / amount
         speeds[pid]["upload_average"] = uploads_sum / amount
-
-    def _create_average_speed_dto(self, averages, pid):
-        """
-        """
-        name = averages.get("name", "")
-        average_download_speed = averages.get("download_average", 0.0)
-        average_upload_speed = averages.get("upload_average", 0.0)
-        last_time_update = averages.get("last_time_update", datetime.now())
-        create_time = averages.get("create_time", datetime.now())
-
-        dto = NetworkTrafficAverageSpeedDTO(
-            pid=pid,
-            name=name,
-            average_download_speed=average_download_speed,
-            average_upload_speed=average_upload_speed,
-            last_time_update=last_time_update,
-            create_time=create_time
-        )
-
-        return dto
 
     def _format_speed_to_float(self, speed: str) -> float:
         """

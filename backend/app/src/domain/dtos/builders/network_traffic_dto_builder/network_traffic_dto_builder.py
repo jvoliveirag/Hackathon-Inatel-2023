@@ -4,9 +4,9 @@ TODO IMPLEMENT
 
 from typing import Any, Dict, List
 
-from ...dtos import NetworkTrafficDTO
-from ...dtos.host_traffic import HostTrafficDTO
-from ...dtos.protocol_traffic import ProtocolTrafficDTO
+from ....dtos import NetworkTrafficDTO
+from ....dtos.host_traffic import HostTrafficDTO
+from ....dtos.protocol_traffic import ProtocolTrafficDTO
 
 
 JSON_TYPE = Dict[str, Any]
