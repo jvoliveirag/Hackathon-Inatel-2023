@@ -4,7 +4,7 @@ Class containing all the button functions for the Tkinter UI.
 # TODO: FIX THIS MODULE
 """
 
-from typing import Dict
+from typing import Any, Dict, List
 
 from application.adapters.controllers.desktop import DesktopController
 
@@ -29,36 +29,26 @@ def read_network_traffic_average_speed() -> Dict[str, str]:
     """
     response = _controller.get_network_traffic_average_speed()
 
-    network_traffic_package = response.get("network_traffic_package")
+    network_traffic_package = response.get("traffic_speed_averages")
     traffic_data = _format_network_traffic_data_to_plot_chart(network_traffic_package)
 
     return traffic_data
 
 
-def save_chart():
-    response = _controller.save_chart()
-    print(response)
-
-
-def export_chart():
-    response = _controller.export_chart()
-    print(response)
-
-
-def _format_network_traffic_data_to_plot_chart(network_traffic_data):
+def _format_network_traffic_data_to_plot_chart(network_traffic_data: List[Dict[str, Any]]):
     """
     TODO: FIX
     """
     traffic_data = {}
 
-    print()
-    print(network_traffic_data)
-    print()
-
     for data in network_traffic_data:
-        download_speed = data["download_speed"]
-        name = data["name"]
+        name = data.get("name", "")
+        average_download_speed = data.get("average_download_speed", 0.0)
+        average_upload_speed = data.get("average_upload_speed", 0.0)
 
-        traffic_data[name] = download_speed
+        traffic_data[name] = {
+            "download": average_download_speed,
+            "upload": average_upload_speed
+        }
 
     return traffic_data

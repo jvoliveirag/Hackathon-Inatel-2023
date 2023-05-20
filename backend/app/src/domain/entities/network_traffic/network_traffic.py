@@ -21,7 +21,7 @@ class NetworkTraffic:
         """
         self._network_traffic_data_provider = network_traffic_provider_factory()
 
-    def get_data(self) -> NetworkTrafficDTO:
+    def get_data(self) -> List[NetworkTrafficDTO]:
         """
         Public Method to get the network traffic data.
         """
