@@ -18,9 +18,14 @@
 <a href='#next'>![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)</a>
 <a href='#tailwind'>![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)</a>
 
-You can check the application <b><u><a href='https://ntracker.vercel.app/'>here</a></u></b>.
+You can run the application by clicking <b><u><a href='https://ntracker.vercel.app/'>here</a></u></b>.
 
 </div>
+
+<h2 id="footer" align="left">Authors</h2>
+
+- [João Victor Oliveira](https://github.com/jvoliveirag)
+- [Maycol Teles](https://github.com/MaycolTeles)
 
 ## Index
 
@@ -60,10 +65,10 @@ You can check the application <b><u><a href='https://ntracker.vercel.app/'>here<
 
 - <h3 id="back" align="left">Back-end</h3>
 
-  - <b><u>Clean Archtecture</u></b>:
-  - <b><u>API</u></b>:
-  - <b><u>Flask</u></b>:
-  - <b><u>TkInter</u></b>:
+  - <b><u>Clean Archtecture</u></b>: By creating the application using the Clean Architecture approach, we're able to decouple our domain (entities, use_cases, etc.) from the "external world" (our UI, external libraries, databases, etc.). In our application, we can have our data displayed in the Tkinter library (for a desktop application) or returned from an API using Flask.
+  - <b><u>Sockets</u></b>: To read the traffic data from the server (the code provided by ViaSat).
+  - <b><u>Flask</u></b>: To create our API endpoints to return the backend data.
+  - <b><u>TkInter</u></b>: To run the application and display data locally (in a destkop application).
 
 <h2 id="future" align="left">Thinking Forward</h2>
     Since we did not have too much time to work on all our ideas we focused on the main goal which was building an application that works well with the given purpose of the challenge. However we thought some features that we want to keep registered for possible future implemmentation such as: 
@@ -75,7 +80,3 @@ You can check the application <b><u><a href='https://ntracker.vercel.app/'>here<
 
 <h2 id="concl" align="left">Conclusion</h2>
 
-<h2 id="footer" align="left">Autors</h2>
-
-- [João Victor Oliveira](https://github.com/jvoliveirag)
-- [Maycol Teles](https://github.com/MaycolTeles)
