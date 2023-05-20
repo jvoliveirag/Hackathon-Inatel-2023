@@ -312,7 +312,7 @@ export default function Report() {
         };
     
         fetchData();
-      }, []);
+    }, []);
     
     // Função para calcular o tamanho da fonte com base no tamanho da janela
     function calculateFontSize() {
@@ -333,6 +333,42 @@ export default function Report() {
         }
     }
 
+
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedValue, setSelectedValue] = useState('');
+  
+    const toggleDropdown = () => {
+        setIsOpen(!isOpen);
+    };
+  
+    const handleOptionSelect = (value: string) => {
+        setSelectedValue(value);
+        setIsOpen(false);
+        console.log(value)
+    };
+
+    function findObjectPosition(searchString: string): number {
+        const averages = trafficSpeedAverages["traffic_speed_averages"];
+      
+        for (let i = 0; i < averages.length; i++) {
+          const obj = averages[i];
+          if (obj.pid === searchString) {
+            return i;
+          }
+        }
+      
+        return 0;
+    }
+      
+    const searchString = selectedValue; //code [1]
+    let position = findObjectPosition(searchString);
+      
+    if (position !== null) {
+        console.log(`A posição do objeto com a string "${searchString}" é: ${position}`);
+    } else {
+        console.log(`O objeto com a string "${searchString}" não foi encontrado.`);
+    }
+
     // Preparar os dados para Highcharts
     const splineChartData = {
         chart: {
@@ -345,7 +381,7 @@ export default function Report() {
         borderRadius: 10,
         },
         title: {
-        text: 'Download x Upload',
+        text: `Download x Upload: ${extractedTrafficData[position].name.toUpperCase()}`,
         style: {
             fontSize: calculateFontSize()
         }
@@ -396,41 +432,15 @@ export default function Report() {
         series: [
             {
                 name: 'Downloads',
-                data: extractedTrafficData[3].downloads,
+                data: extractedTrafficData[position].downloads,
                 color: '#0f0'
             },
             {
                 name: 'Uploads',
-                data: extractedTrafficData[3].uploads,
+                data: extractedTrafficData[position].uploads,
                 color: '#494F56',
             },
         ],
-        tooltip: {
-            formatter(this: Highcharts.TooltipFormatterContextObject): string {
-                const point = this.point as Highcharts.Point;
-                const seriesName = point.series.name;
-                const value = point.y;
-        
-
-                // Verificar se o índice é válido
-                if (point.index >= 0 && point.index < extractedTrafficData.length) {
-                    // Obter os valores extras
-                    const { pid, create_time, last_time_update, name } = extractedTrafficData[point.index];
-            
-                    // Construir o conteúdo da legenda
-                    let tooltipContent = `<b>Programa:</b> ${name} | <b>PID: </b>${pid}<br>`;
-                    tooltipContent += `<b>${seriesName}: </b> ` + `${value} Bps<br>`;
-                    tooltipContent += `<b>Criado em: </b>${create_time}<br>`;
-                    tooltipContent += `<b>Última Atualização: </b>${last_time_update}<br>`;
-            
-                    // Retornar o conteúdo da legenda formatado
-                    return tooltipContent;
-                }
-            
-                // Se o índice for inválido, retornar uma string vazia
-                return '';
-            }
-        },
     };
     
     const columnChartData = {
@@ -517,21 +527,6 @@ export default function Report() {
         }
         },
     };
-
-
-    const [isOpen, setIsOpen] = useState(false);
-    const [selectedValue, setSelectedValue] = useState('');
-  
-    const toggleDropdown = () => {
-      setIsOpen(!isOpen);
-    };
-  
-    const handleOptionSelect = (value: string) => {
-      setSelectedValue(value);
-      setIsOpen(false);
-      console.log(value) //pega o pid para selecionar os valores a serem exibidos no grafico
-    };
-
 
   return (
     <>
