@@ -42,6 +42,6 @@ class FlaskUI(UI):
     def _create_routes(self) -> None:
         """
         """
-        self._flask.add_url_rule('/', 'index', endpoints.index)
-        self._flask.add_url_rule('/network-traffic-data', 'network-traffic-data', endpoints.network_traffic_data)
-        self._flask.add_url_rule('/network-traffic-average-speed', 'network-traffic-average-speed', endpoints.network_traffic_average_speed)
+        self._flask.add_url_rule('/api/', 'index', endpoints.index)
+        self._flask.add_url_rule('/api/network-traffic-data', 'network-traffic-data', endpoints.network_traffic_data)
+        self._flask.add_url_rule('/api/network-traffic-average-speed', 'network-traffic-average-speed', endpoints.network_traffic_average_speed)

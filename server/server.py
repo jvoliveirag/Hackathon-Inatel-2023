@@ -7,7 +7,7 @@ import socket
 import json
 
 # Endereço da máquina local
-HOST = '0.0.0.0'
+HOST = "127.0.0.1"
 
 # Portas efêmeras utilizadas para comunicação por socket
 PORT_NETWORK_TRAFFIC = 50_000
@@ -313,6 +313,8 @@ def send_traffic_data():
                 f'{json}\r\n'
             )
 
+            print("RESPONSE: ", response)
+
             try:
                 client_socket.sendall(response.encode())
             except (ConnectionResetError, ConnectionRefusedError, ConnectionAbortedError, BrokenPipeError):
@@ -360,6 +362,7 @@ def print_processes():
 
 def main():
     print("SERVER STARTED")
+
     connection_thread = Thread(target=fetch_connections)
     printing_thread = Thread(target=send_traffic_data)
 
