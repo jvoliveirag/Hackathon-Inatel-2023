@@ -314,7 +314,6 @@ export default function Report() {
         fetchData();
       }, []);
     
-
     // Função para calcular o tamanho da fonte com base no tamanho da janela
     function calculateFontSize() {
         if (typeof window !== 'undefined') {
