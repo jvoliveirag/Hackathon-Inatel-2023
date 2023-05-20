@@ -405,32 +405,7 @@ export default function Report() {
                 color: '#494F56',
             },
         ],
-        tooltip: {
-            formatter(this: Highcharts.TooltipFormatterContextObject): string {
-                const point = this.point as Highcharts.Point;
-                const seriesName = point.series.name;
-                const value = point.y;
-        
 
-                // Verificar se o índice é válido
-                if (point.index >= 0 && point.index < extractedTrafficData.length) {
-                    // Obter os valores extras
-                    const { pid, create_time, last_time_update, name } = extractedTrafficData[point.index];
-            
-                    // Construir o conteúdo da legenda
-                    let tooltipContent = `<b>Programa:</b> ${name} | <b>PID: </b>${pid}<br>`;
-                    tooltipContent += `<b>${seriesName}: </b> ` + `${value} Bps<br>`;
-                    tooltipContent += `<b>Criado em: </b>${create_time}<br>`;
-                    tooltipContent += `<b>Última Atualização: </b>${last_time_update}<br>`;
-            
-                    // Retornar o conteúdo da legenda formatado
-                    return tooltipContent;
-                }
-            
-                // Se o índice for inválido, retornar uma string vazia
-                return '';
-            }
-        },
     };
     
     const columnChartData = {
