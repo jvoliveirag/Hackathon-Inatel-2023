@@ -26,7 +26,7 @@ class DesktopController:
         use_case = ReadNetworkTrafficData()
         response = use_case.execute()
 
-        desktop_response = self._presenter.present_network_traffic_data(response) 
+        desktop_response = self._presenter.present_network_traffic_data(response)
 
         return desktop_response
 
@@ -40,11 +40,3 @@ class DesktopController:
         desktop_response = self._presenter.present_network_traffic_average_speed(response) 
 
         return desktop_response
-
-    def save_chart(self):
-        """"""
-        return "saving chart"
-
-    def export_chart(self):
-        """"""
-        return "exporting chart"

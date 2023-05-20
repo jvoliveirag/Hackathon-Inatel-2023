@@ -48,7 +48,7 @@ class SocketIO(NetworkTrafficDataProvider):
         self._is_active = False
         self._receive_messages_thread.join()
 
-    def get_data(self) -> NetworkTrafficDTO:
+    def get_data(self) -> List[NetworkTrafficDTO]:
         """
         Method to get the network traffic data.
         """
@@ -93,15 +93,30 @@ class SocketIO(NetworkTrafficDataProvider):
 
         self.shut_down()
 
-    def _get_single_socket_message(self) -> NetworkTrafficDTO:
+    def _get_single_socket_message(self) -> List[NetworkTrafficDTO]:
         """
         """
         # TODO: FIX - ONLY RETURNING THE FIRST MESSAGE (WHICH MEANS ONLY ONE PROCESS)
         # TODO: FIX - IMPLEMENT A WAY TO GET ALL DTO FROM THE FIRST MESSAGE (ALL THE PROCESS FROM THE FIRST MESSAGE)
-        first_message = self._messages[0]
+        messages = []
+        pids = []
+
+        try:
+            for message in self._messages:
+                if message.pid in pids:
+                    break
+
+                messages.append(message)
+                pids.append(message.pid)
+
+        except IndexError as error:
+            print("EXCEPTION")
+            print(error)
+            messages = None
+
         self._messages.clear()
 
-        return first_message
+        return messages
 
     def _get_socket_messages_package(self) -> List[NetworkTrafficDTO]:
         """"""

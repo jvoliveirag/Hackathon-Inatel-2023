@@ -6,6 +6,7 @@ TODO: FIX MODULE
 
 from typing import List
 from collections import defaultdict
+import re
 
 from ....dtos.builders.network_traffic_average_speed import NetworkTrafficAverageSpeedDTOBuilder
 from ....dtos.network_traffic import NetworkTrafficDTO
@@ -112,13 +113,23 @@ class ReadNetworkTrafficAverageSpeed:
         """
         TODO
         """
-        speed_without_unit = speed[:-3]
+        units = {
+            'B/s': 1,
+            'KB/s': 1024,
+            'MB/s': 1024 ** 2,
+            'GB/s': 1024 ** 3
+        }
 
-        # TODO: FIX ERROR BELOW
-        # ValueError: could not convert string to float: '1.26K'
-        try:
-            speed_int = float(speed_without_unit)
-        except ValueError:
-            speed_int = 0.0
+        pattern = r'(\d+\.?\d*)([KMG]?B\/s)'
+        match = re.match(pattern, speed)
 
-        return speed_int
+        if not match:
+            return 0.0
+
+        value = float(match.group(1))
+        unit = match.group(2)
+
+        speed_number = value * units[unit]
+
+
+        return speed_number
