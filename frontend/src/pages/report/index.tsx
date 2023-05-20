@@ -19,51 +19,13 @@ export default function Report() {
         "average_upload_speed": 0,
         "create_time": "19/05/2023, 13:20:47",
         "downloads": [
-        66,
-        66,
-        66,
-        66,
-        66,
-        74,
-        66,
-        66,
-        66,
-        66,
-        156,
-        123,
-        74,
-        101,
-        66,
-        75,
-        66,
-        160,
-        112,
-        66
+            66, 66, 66, 66, 66, 74, 66, 66, 66, 66, 156, 123, 74, 101, 66, 75, 66, 160, 112, 66
         ],
         "last_time_update": "19/05/2023, 18:17:49",
         "name": "chrome",
         "pid": "3242",
         "uploads": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
+            37, 127, 172, 59, 87, 103, 14, 182, 96, 101, 154, 11, 45, 193, 72, 83, 32, 26, 185, 68
         ]
         },
         {
@@ -71,26 +33,7 @@ export default function Report() {
         "average_upload_speed": 0,
         "create_time": "19/05/2023, 16:17:36",
         "downloads": [
-        66,
-        66,
-        66,
-        66,
-        66,
-        66,
-        66,
-        66,
-        54,
-        54,
-        54,
-        54,
-        54,
-        898,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54
+            66, 66, 66, 66, 66,66,66, 66, 54, 54, 54, 54, 54, 898, 54, 54, 54, 54, 54, 54
         ],
         "last_time_update": "19/05/2023, 18:17:44",
         "name": "code",
@@ -123,26 +66,7 @@ export default function Report() {
         "average_upload_speed": 0,
         "create_time": "19/05/2023, 16:17:36",
         "downloads": [
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        74,
-        74,
-        571,
-        54,
-        54,
-        54,
-        54
+            139, 97, 161, 78, 123, 56, 71, 48, 17, 8, 53, 141, 64, 183, 108, 192, 91, 188, 4, 120
         ],
         "last_time_update": "19/05/2023, 18:17:47",
         "name": "code",
@@ -172,7 +96,7 @@ export default function Report() {
         },
         {
         "average_download_speed": 141,
-        "average_upload_speed": 0,
+        "average_upload_speed": 78,
         "create_time": "19/05/2023, 13:20:32",
         "downloads": [
         233,
@@ -197,29 +121,10 @@ export default function Report() {
         91
         ],
         "last_time_update": "19/05/2023, 18:17:43",
-        "name": "systemd-resolved",
+        "name": "teams",
         "pid": "544",
         "uploads": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
+            125, 55, 38, 140, 186, 97, 177, 26, 90, 41, 165, 77, 4, 116, 59, 134, 83, 13, 124, 154
         ]
         },
         {
@@ -276,61 +181,10 @@ export default function Report() {
         },
         {
         "average_download_speed": 54,
-        "average_upload_speed": 0,
-        "create_time": "19/05/2023, 16:17:35",
-        "downloads": [
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54
-        ],
-        "last_time_update": "19/05/2023, 18:16:05",
-        "name": "code",
-        "pid": "9812",
-        "uploads": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-        ]
-        },
-        {
-        "average_download_speed": 54,
-        "average_upload_speed": 0,
+        "average_upload_speed": 97,
         "create_time": "19/05/2023, 16:17:38",
         "downloads": [
+        57,
         54,
         54,
         54,
@@ -353,29 +207,10 @@ export default function Report() {
         54
         ],
         "last_time_update": "19/05/2023, 18:15:46",
-        "name": "code",
+        "name": "discord",
         "pid": "10010",
         "uploads": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
+            71, 164, 79, 22, 160, 11, 150, 173, 37, 195, 143, 115, 93, 42, 30, 98, 187, 133, 119, 141
         ]
         },
         {
@@ -430,58 +265,6 @@ export default function Report() {
         0
         ]
         },
-        {
-        "average_download_speed": 54,
-        "average_upload_speed": 0,
-        "create_time": "19/05/2023, 13:20:43",
-        "downloads": [
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54,
-        54
-        ],
-        "last_time_update": "19/05/2023, 17:20:57",
-        "name": "evolution-calendar-factory",
-        "pid": "1929",
-        "uploads": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-        ]
-        }
         ]
     }
 
@@ -579,7 +362,7 @@ export default function Report() {
         },
         xAxis: {
         min: 0, // Define o valor mínimo do eixo X
-        max: extractedTrafficData.length, // Define o valor máximo do eixo X
+        max: 20, // Define o valor máximo do eixo X
         title: {
             text: 'tempo [s]',
             style: {
@@ -614,12 +397,12 @@ export default function Report() {
         series: [
             {
                 name: 'Downloads',
-                data: extractedTrafficData.map(item => item.download_speed),
+                data: extractedTrafficData[3].downloads,
                 color: '#0f0'
             },
             {
                 name: 'Uploads',
-                data: extractedTrafficData.map(item => item.upload_speed),
+                data: extractedTrafficData[3].uploads,
                 color: '#494F56',
             },
         ],
@@ -706,12 +489,12 @@ export default function Report() {
             {
                 name: 'Vel. Download',
                 data: extractedTrafficData.map(item => item.download_speed),
-                color: '#494F56',
+                color: '#0f0',
             },
             {
                 name: 'Vel. Upload',
                 data: extractedTrafficData.map(item => item.upload_speed),
-                color: '#0f0',
+                color: '#494F56',
             }
         ],
         
@@ -770,7 +553,7 @@ export default function Report() {
                             <div className='flex items-center justify-between bg-white rounded-full p-1 gap-4 md:text-2xl'>
                                 <input type="text" placeholder='procure aqui um alerta' className='rounded-full text-sm lg:pr-28 sm:pr-28 pr-0'/>
                                 <div className='flex items-center justify-center gap-4 mr-2'>
-                                    <Link href='/report'>
+                                    <Link href='/report/'>
                                         <button className='flex items-center justify-center' type="submit">
                                             <FaRedo/>
                                         </button>

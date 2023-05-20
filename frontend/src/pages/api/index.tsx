@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import axios from 'axios';
 
 const BASE_URL = 'http://127.0.0.1:5000/'
-const ENDPOIT = 'network-traffic-data' //network-traffic-speed-package
+const ENDPOIT = 'network-traffic-speed-package' //network-traffic-data
 
 export default async function handler(
   req: NextApiRequest,
