@@ -20,6 +20,8 @@
 
 You can check the application <b><u><a href='https://ntracker.vercel.app/'>here</a></u></b>.
 
+<img align='center' src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZjNhMThlZjcyODQ5YjJhN2JhYjNkMjAyNmU3Y2NiMDBkZGJlNjQ3MCZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/qlDZRtXiEqYeOzMTcm/giphy.gif" width="450">
+
 </div>
 
 ## Index
@@ -34,7 +36,8 @@ You can check the application <b><u><a href='https://ntracker.vercel.app/'>here<
 - <a href="#concl">Conclusion</a>
 - <a href="#footer">Footer</a>
 
-<h2 id="intro" align="left">Intro</h2>
+<h2 id="intro" align="left">Introduction - nTracker</h2>
+An application to monitor yout network traffic.
 
 <h2 id="app" align="left">Application Overview</h2>
 
@@ -75,7 +78,7 @@ You can check the application <b><u><a href='https://ntracker.vercel.app/'>here<
 
 <h2 id="concl" align="left">Conclusion</h2>
 
-<h2 id="footer" align="left">Autors</h2>
+<h2 id="footer" align="left">Authors</h2>
 
 - [João Victor Oliveira](https://github.com/jvoliveirag)
 - [Maycol Teles](https://github.com/MaycolTeles)
