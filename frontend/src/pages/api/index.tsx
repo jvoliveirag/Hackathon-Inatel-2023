@@ -2,15 +2,16 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import axios from 'axios';
 
-const BASE_URL = 'http://127.0.0.1:5000/'
-const ENDPOIT = 'network-traffic-speed-package' //network-traffic-data
+const BASE_URL = 'http://localhost:8080/api/'
+const ENDPOIT = 'network-traffic-data'
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  console.log("API called");
   try {
-    const response = await axios.get(`${BASE_URL}${ENDPOIT}`);
+    const response = await axios.get(`${BASE_URL}`);
     res.json(response.data);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch data from the backend.' });

@@ -2,7 +2,7 @@
 Module containing all the socket constants.
 """
 
-_SERVER_HOST = "0.0.0.0"
+_SERVER_HOST = "127.0.0.1"
 
 _SERVER_PORT = 50_000
 

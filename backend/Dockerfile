@@ -19,5 +19,8 @@ COPY /app .
 # Set the environment variable for Flask
 ENV UI_INJECTION="Flask"
 
+# Expose the port for the App
+EXPOSE 5000
+
 # Set the command to run the App
-CMD ["python", "-m" "src.main"]
+CMD ["python", "src/main.py"]

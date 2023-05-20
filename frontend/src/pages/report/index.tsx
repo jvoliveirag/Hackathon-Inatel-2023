@@ -10,6 +10,9 @@ import HighchartsReact from 'highcharts-react-official';
 
 const HELP_CONTACT = 'https://github.com/jvoliveirag/Hackathon-Inatel-2023'
 
+const API_URL = 'http://localhost:8080/api/'
+const API_ENDPOINT = 'network-traffic-average-speed'
+
 export default function Report() {
 
     const trafficSpeedAverages = {
@@ -301,7 +304,7 @@ export default function Report() {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await axios.get('../api');
+            const response = await axios.get(`${API_URL}${API_ENDPOINT}`);
             console.log(response.data);
             console.log(response.data.traffic_speed_averages[0])
             extractedTrafficData = response.data.traffic_speed_averages

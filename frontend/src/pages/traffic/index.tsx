@@ -7,6 +7,9 @@ import { NavBar } from '../../components/NavBar'
 
 const HELP_CONTACT = 'https://github.com/jvoliveirag/Hackathon-Inatel-2023'
 
+const API_URL = 'http://localhost:8080/api/'
+const API_ENDPOINT = 'network-traffic-data'
+
 export default function Traffic() {
 
   const assets = [
@@ -133,7 +136,7 @@ export default function Traffic() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('../api');
+        const response = await axios.get(`${API_URL}${API_ENDPOINT}`);
         console.log(response.data);
       } catch (error) {
         console.error('Failed to fetch data:', error);
