@@ -7,7 +7,7 @@ import socket
 import json
 
 # Endereço da máquina local
-HOST = "127.0.0.1"
+HOST = "0.0.0.0"
 
 # Portas efêmeras utilizadas para comunicação por socket
 PORT_NETWORK_TRAFFIC = 50_000
@@ -313,8 +313,6 @@ def send_traffic_data():
                 f'{json}\r\n'
             )
 
-            print("RESPONSE: ", response)
-
             try:
                 client_socket.sendall(response.encode())
             except (ConnectionResetError, ConnectionRefusedError, ConnectionAbortedError, BrokenPipeError):
@@ -333,20 +331,12 @@ def attempt_socket_reconnection(task_socket: socket, port: int, attempts: int):
     """
     Attempts to reconnect to a given socket and port by a non-negative number of attempts.
     """
-    current_attempt = 1
-
-    if attempts < 0:
-        attempts = 5
-
-    while(current_attempt <= attempts):
-        print("Attempting to reconnect to port %d (%d/%d)" %(port, current_attempt, attempts))
+    while True:
         try:
             client_socket, client_address = task_socket.accept()
             return client_socket, client_address
         except socket.timeout:
             continue
-    
-    return False, False
 
 def fetch_connections():
     while is_program_running:
