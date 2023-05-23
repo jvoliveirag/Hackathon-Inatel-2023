@@ -57,6 +57,8 @@ The <u><b>nTracker</b></u> is an application to monitor your network traffic and
 - Realtime display of the payload;
 - Multiplatform: web (which also works on mobile devices), desktop.
 
+And here is a short video (in PT-BR) explaining a little bit about the app and its development: <a href='https://drive.google.com/file/d/1WnmZ-0mR-ZlX6-6oapkfCf3AUl22lGUI/view?usp=sharing'>nTracker presentation - Hackathon Inatel 2023</a>
+
 <h2 id="dev" align="left">Development ⚙️</h2>
 
 <u><b>Obs.:</b></u> To see details like requirements, setup and install and how to use, please refer to the docs of the respective end by just clicking on their name below.
